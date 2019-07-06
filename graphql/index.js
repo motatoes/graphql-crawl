@@ -22,20 +22,34 @@ const typeDefs = gql`
     raw_text: String
   }
 
+  type PageFeed {
+    # cursor specifies the place in the list where we left off
+    cursor: String!
+    
+    # this is a chunk of messages to be returned
+    pages: [Page]!
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    pages: [Page]
+    pages(domain: String, limit: Int, offset: Int): [Page]
   }
 `;
 
 // Resolvers define the technique for fetching the types in the
-// schema.  We'll retrieve books from the "books" array above.
+// schema. 
 const resolvers = {
   Query: {
-    pages: async () => await Page.find({}).exec(),
+    pages: async (_, args) => 
+      await Page
+              .find({domain: args.domain})
+              .skip(args.offset || 0)
+              .limit(args.limit || 10)
+              .exec()
+    
           //  async () => await User.find({}).exec()
-  },
+  }
 };
 
 // In the most basic sense, the ApolloServer can be started
