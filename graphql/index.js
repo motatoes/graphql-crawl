@@ -41,12 +41,19 @@ const typeDefs = gql`
 // schema. 
 const resolvers = {
   Query: {
-    pages: async (_, args) => 
-      await Page
-              .find({domain: args.domain})
-              .skip(args.offset || 0)
-              .limit(args.limit || 10)
-              .exec()
+    pages: async (_, args) => {
+      args.offset = args.offset || 0
+      args.limit = args.limit || 10
+      if (args.limit > 100 || args.limit < 0) {
+        args.limit = 100
+      }
+      let results = await Page.find({domain: args.domain || "muzmatch.com"})
+              .skip(args.offset)
+              .limit(args.limit)
+              .exec();
+      return results
+    }
+
     
           //  async () => await User.find({}).exec()
   }
