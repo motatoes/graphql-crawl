@@ -32,6 +32,7 @@ services:
       context: "graphql/"
     volumes:
       - ./graphql/:/app
+      - /app/node_modules
     depends_on:
       - db
     environment:
