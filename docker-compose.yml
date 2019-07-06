@@ -1,0 +1,45 @@
+
+version: "3.7"
+services:
+
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: crawl
+    ports:
+      - "27017:27017"
+
+  crawler:
+    build:
+      context: "crawler/"
+    volumes:
+      - ./crawler/:/app
+    depends_on:
+      - db
+    environment:
+      MONGO_HOST: db
+      MONGO_USER: root
+      MONGO_PASS: password
+      MONGO_PORT: 27017
+    ports:
+      - "9901:9901"
+
+  graphql:
+    build:
+      context: "graphql/"
+    volumes:
+      - ./graphql/:/app
+    depends_on:
+      - db
+    environment:
+      MONGO_HOST: db
+      MONGO_USER: root
+      MONGO_PASS: password
+      MONGO_PORT: 27017
+      MONGO_DB: crawl
+    ports:
+      - "4000:4000"
+
