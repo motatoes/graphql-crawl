@@ -55,6 +55,7 @@ and also the root domain, which can be used for filtering the results.
     pages(domain: String, limit: Int, offset: Int): [Page]
   }
 ```
+**Note:** The results are paginated and only the first 10 matches are returned for each query. You can pass a `limit` (upto 100) and an `offset` parameter to retrieve more results.
 
 # Future Improvements
 
