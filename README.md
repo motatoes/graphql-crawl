@@ -5,11 +5,11 @@
 Try it on digital ocean: [http://128.199.35.101:4000/](http://128.199.35.101:4000/)
 
 This project consists of three main services. It is a broad crawler that crawls pages for a single domain starting from the root domain
-and spreads by following all internal links. It will fetch the title, raw content after stripping tags, and some meta tags information.
+and spreads by following all internal links. It will fetch the title, raw content after stripping tags, and some meta tags information:
 
-1- A mongodb service `db`
-2- A crawler worker using python and scrapy `crawler`
-3- A `graphql` service which uses node and apollo
+1. A mongodb service `db`
+2. A crawler worker using python and scrapy `crawler`
+3. A `graphql` service which uses node and apollo
 
 # Installing the project
 
