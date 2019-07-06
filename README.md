@@ -55,3 +55,8 @@ and also the root domain, which can be used for filtering the results.
     pages(domain: String, limit: Int, offset: Int): [Page]
   }
 ```
+
+# Future Improvements
+
+- Index the `domain` field in the mongodb collection
+- add more filtering options to the graphql schema
