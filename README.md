@@ -61,3 +61,5 @@ and also the root domain, which can be used for filtering the results.
 
 - Index the `domain` field in the mongodb collection
 - add more filtering options to the graphql schema
+- use frontera to make the crawler distributed and efficient for large-scale crawls
+- Use it behind a distributed proxy to avoid rate limiting by sites with bot protection
